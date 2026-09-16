@@ -1,0 +1,24 @@
+# Zmienne środowiskowe i pliki z kluczami API (SEKRETY)
+.env
+service_account.json
+*.json
+!.env.example
+
+# Foldery kopii zapasowych i archiwum
+archive/
+archiwum/
+
+# Pakiety i pamięć podręczna Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+*.log
+
+# Systemowe i edytory
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
