@@ -1,4 +1,4 @@
-# Plan Wdrożenia i Testów (Wersja Akademicka / Szablon)
+# Plan Wdrożenia i Testów
 
 Podręcznik opisujący krok po kroku uruchomienie, testowanie oraz utrzymanie zautomatyzowanego księgozbioru cyfrowego.
 

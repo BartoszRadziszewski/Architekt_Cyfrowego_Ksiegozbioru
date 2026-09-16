@@ -63,10 +63,10 @@ python run_agents.py
 
 ## 📄 Dokumentacja Projektowa
 
-W repozytorium znajdują się szczegółowe dokumenty akademickie:
-- [Opis Projektu (Wersja Akademicka)](opis_projektu-Architekt_Cyfrowego_Księgozbioru.md)
-- [Specyfikacja Systemowa i Prompty](prompt.md)
-- [Plan Wdrożenia i Testów UAT](plan_wdrozenia_i_testow.md)
+W repozytorium znajdują się szczegółowe dokumenty projektowe:
+- [Opis Architektury](ARCHITECTURE.md)
+- [Specyfikacja Systemowa i Prompty](PROMPT.md)
+- [Plan Wdrożenia i Testów UAT](DEPLOYMENT.md)
 
 ---
 

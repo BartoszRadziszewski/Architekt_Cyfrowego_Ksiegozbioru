@@ -1,4 +1,4 @@
-# Opis Projektu: Architekt Cyfrowego Księgozbioru i Inżynier Automatyzacji AI (Wersja Akademicka)
+# Opis Projektu: Architekt Cyfrowego Księgozbioru i Inżynier Automatyzacji AI
 
 ## 1. Wstęp i Wizja Projektu
 Projekt **"Architekt Cyfrowego Księgozbioru"** to kompleksowy, zautomatyzowany system katalogowania, sanitacji i inwentaryzacji wielojęzycznych cyfrowych zasobów literackich i naukowych zlokalizowanych w chmurze (Google Drive). 
