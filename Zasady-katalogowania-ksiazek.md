@@ -1,2 +1,0 @@
-\# Testowe zasady
-
