@@ -9,7 +9,7 @@ from src.gemini_api import GeminiService
 POLISH_MAP = str.maketrans("ąćęłńóśźżĄĆĘŁŃÓŚŹŻ", "acelnoszzACELNOSZZ")
 
 def local_clean_filename(filename):
-    """Zaawansowana sanitacja nazwy pliku lub folderu z usuwaniem sufixów duplikatów."""
+    """Zaawansowana sanitacja nazwy pliku lub folderu z usuwaniem sufixów duplikatów, %20, wielokrotnych kropek i __."""
     if '.' in filename:
         parts = filename.rsplit('.', 1)
         name = parts[0]
@@ -18,33 +18,32 @@ def local_clean_filename(filename):
         name = filename
         ext = ""
 
-    # 1. Podmiana polskich znaków
+    # 1. Dekodowanie URL (%20 -> _)
+    name = name.replace('%20', '_')
+
+    # 2. Podmiana polskich znaków
     name_clean = name.translate(POLISH_MAP)
 
-    # 2. Awaryjna normalizacja NFKD
+    # 3. Awaryjna normalizacja NFKD
     nfkd_form = unicodedata.normalize('NFKD', name_clean)
     name_ascii = "".join([c for c in nfkd_form if not unicodedata.combining(c)])
 
-    # 3. Usuwanie sufixów duplikatów przeglądarki i systemu (' (1)', '-(1)', '-1', '- kopia', '_copy')
+    # 4. Usuwanie sufixów duplikatów przeglądarki i systemu (' (1)', '-(1)', '-1', '- kopia', '_copy')
     name_ascii = re.sub(r'[\s_\-]*\(\d+\)', '', name_ascii)
     name_ascii = re.sub(r'[\s_\-]+\d+$', '', name_ascii)
     name_ascii = re.sub(r'[\s_\-]*(kopia|copy)\b', '', name_ascii, flags=re.IGNORECASE)
 
-    # 4. Zamiana myślników (-), spacji oraz nie-liter/nie-cyfr na _
+    # 5. Zamiana myślników (-), spacji oraz nie-liter/nie-cyfr (w tym kropek i %) na _
     clean_name = re.sub(r'[^\w]', '_', name_ascii)
 
-    # 5. Redukcja wielokrotnych '_' do jednego i usunięcie brzegowych
+    # 6. Redukcja wielokrotnych '_' do jednego i usunięcie brzegowych
     clean_name = re.sub(r'_+', '_', clean_name).strip('_')
 
     return f"{clean_name}{ext}"
 
 def is_valid_name(name):
-    """Sprawdza, czy nazwa jest czysta."""
-    invalid_chars = " -()ąćęłńóśźżĄĆĘŁŃÓŚŹŻ"
-    for char in invalid_chars:
-        if char in name:
-            return False
-    return True
+    """Sprawdza, czy nazwa jest w pełni czysta (zgodna z wynikiem local_clean_filename)."""
+    return name == local_clean_filename(name)
 
 def run_agent2():
     print("Rozpoczęcie pracy Agenta 2 (Monitoring i Detekcja Duplikatów)...")
